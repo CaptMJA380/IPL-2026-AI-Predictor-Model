@@ -142,8 +142,11 @@ df = df[df['winner'].isin(teams)]
 
 # ---------------- PREDICT FUNCTION ----------------
 def predict_prob(t1, t2):
-    i1 = team_to_idx[t1]
-    i2 = team_to_idx[t2]
+    if t1 not in elo or t2 not in elo:
+        return 0.5  # fallback (neutral)
+
+    i1 = team_to_idx.get(t1, 0)
+    i2 = team_to_idx.get(t2, 0)
 
     e1 = elo[t1]
     e2 = elo[t2]
