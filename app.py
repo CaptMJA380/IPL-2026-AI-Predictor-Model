@@ -120,9 +120,13 @@ st.markdown("""
 
 # ---------------- LOAD ----------------
 model = joblib.load("model/model.pkl")
-team_to_idx = joblib.load("model/team_index.pkl")
 elo = joblib.load("model/elo.pkl")
 
+import pickle
+with open("model/h2h.pkl", "rb") as f:
+    h2h = pickle.load(f)
+
+features = joblib.load("model/features.pkl")
 # Download dataset
 path = kagglehub.dataset_download("chaitu20/ipl-dataset2008-2025")
 csv_path = os.path.join(path, "IPL.csv")
@@ -143,15 +147,19 @@ df = df[df['winner'].isin(teams)]
 # ---------------- PREDICT FUNCTION ----------------
 def predict_prob(t1, t2):
     if t1 not in elo or t2 not in elo:
-        return 0.5  # fallback (neutral)
+        return 0.5
 
-    i1 = team_to_idx.get(t1, 0)
-    i2 = team_to_idx.get(t2, 0)
+    e1, e2 = elo[t1], elo[t2]
 
-    e1 = elo[t1]
-    e2 = elo[t2]
+    key = tuple(sorted([t1, t2]))
+    total = h2h.get(key, [0, 0])[1]
+    wins  = h2h.get(key, [0, 0])[0] if t1 == key[0] else (total - h2h.get(key, [0, 0])[0])
 
-    return model.predict_proba([[i1, i2, e1, e2]])[0][1]
+    h2h_rate = wins / total if total > 0 else 0.5
+
+    X = np.array([[e1, e2, e1 - e2, h2h_rate]])
+
+    return model.predict_proba(X)[0][1]
 
 # ---------------- UI ----------------
 st.markdown("<h1>🏏 IPL 2026 AI Predictor</h1>", unsafe_allow_html=True)
