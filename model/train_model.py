@@ -19,13 +19,19 @@ import matplotlib.pyplot as plt
 from collections import defaultdict
 from xgboost import XGBClassifier
 from sklearn.model_selection import cross_val_score, StratifiedKFold
+import kagglehub
+import os
 
 os.makedirs("model", exist_ok=True)
 
 # ── 1. LOAD DATA ──────────────────────────────────────────────────────────────
 # Update this path if your CSV is elsewhere
-CSV_PATH = "data/IPL.csv"
-df_raw = pd.read_csv(CSV_PATH, low_memory=False)
+
+
+path = kagglehub.dataset_download("chaitu20/ipl-dataset2008-2025")
+
+csv_path = os.path.join(path, "IPL.csv")
+df_raw = pd.read_csv(csv_path, low_memory=False)
 print(f"Raw rows: {len(df_raw):,}")
 
 # ── 2. NORMALISE TEAM NAMES ───────────────────────────────────────────────────
