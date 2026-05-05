@@ -16,7 +16,7 @@ LOGO_MAP = {
     "Royal Challengers Bangalore": "https://documents.iplt20.com/ipl/RCB/Logos/Logooutline/RCBoutline.png",
     "Royal Challengers Bengaluru": "https://documents.iplt20.com/ipl/RCB/Logos/Logooutline/RCBoutline.png",
     "Kolkata Knight Riders": "https://documents.iplt20.com/ipl/KKR/Logos/Logooutline/KKRoutline.png",
-    "Delhi Capitals": "https://documents.iplt20.com/ipl/DC/Logos/Logooutline/DCoutline.png",
+    "Delhi Capitals": "https://documents.iplt20.com/ipl/DC/Logos/LogoOutline/DCoutline.png",
     "Delhi Daredevils": "https://documents.iplt20.com/ipl/DC/Logos/Logooutline/DCoutline.png",
     "Punjab Kings": "https://documents.iplt20.com/ipl/PBKS/Logos/Logooutline/PBKSoutline.png",
     "Kings XI Punjab": "https://documents.iplt20.com/ipl/PBKS/Logos/Logooutline/PBKSoutline.png",
