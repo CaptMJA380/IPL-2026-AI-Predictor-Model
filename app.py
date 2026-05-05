@@ -3,6 +3,8 @@ import pandas as pd
 import numpy as np
 import joblib
 import plotly.express as px
+import kagglehub
+import os
 
 # ---------------- CONFIG ----------------
 st.set_page_config(page_title="IPL 2026 Predictor", layout="wide")
@@ -121,7 +123,11 @@ model = joblib.load("model/model.pkl")
 team_to_idx = joblib.load("model/team_index.pkl")
 elo = joblib.load("model/elo.pkl")
 
-raw_df = pd.read_csv("data/IPL.csv", low_memory=False)
+# Download dataset
+path = kagglehub.dataset_download("chaitu20/ipl-dataset2008-2025")
+csv_path = os.path.join(path, "IPL.csv")
+
+raw_df = pd.read_csv(csv_path, low_memory=False)
 df = raw_df[['match_id', 'batting_team', 'bowling_team', 'match_won_by']].drop_duplicates(subset=['match_id']).copy()
 df = df.rename(columns={'batting_team': 'team1', 'bowling_team': 'team2', 'match_won_by': 'winner'})
 df = df.dropna(subset=["winner"])

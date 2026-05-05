@@ -4,10 +4,16 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from xgboost import XGBClassifier
 import joblib
+import kagglehub
+import os
 
 sns.set_style("whitegrid")
 
-raw_df = pd.read_csv("data/IPL.csv", low_memory=False)
+# Download dataset
+path = kagglehub.dataset_download("chaitu20/ipl-dataset2008-2025")
+csv_path = os.path.join(path, "IPL.csv")
+
+raw_df = pd.read_csv(csv_path, low_memory=False)
 df = raw_df[['match_id', 'batting_team', 'bowling_team', 'match_won_by']].drop_duplicates(subset=['match_id']).copy()
 df = df.rename(columns={'batting_team': 'team1', 'bowling_team': 'team2', 'match_won_by': 'winner'})
 df = df.dropna(subset=["winner"])
