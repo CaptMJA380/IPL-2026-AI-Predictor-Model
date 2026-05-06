@@ -84,6 +84,19 @@ st.markdown("""
         color: #f8fafc !important;
     }
     
+    .title-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .main-logo {
+        width: 80px;
+        margin-right: 20px;
+        filter: drop-shadow(0 0 15px rgba(255,255,255,0.3));
+    }
+    
     h1 {
         font-family: 'Outfit', sans-serif;
         background: linear-gradient(135deg, #fbbf24, #f59e0b, #ef4444);
@@ -91,8 +104,8 @@ st.markdown("""
         -webkit-text-fill-color: transparent;
         font-weight: 900 !important;
         letter-spacing: -1px;
-        text-align: center;
-        padding: 20px 0;
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
     .team-logo {
@@ -179,7 +192,12 @@ def predict_prob(t1, t2):
     return model.predict_proba(X)[0][1]
 
 # ---------------- UI ----------------
-st.markdown("<h1>🏏 IPL 2026 AI Predictor</h1>", unsafe_allow_html=True)
+st.markdown(f"""
+    <div class="title-container">
+        <img src="{DEFAULT_LOGO}" class="main-logo">
+        <h1>IPL 2026 AI Predictor</h1>
+    </div>
+""", unsafe_allow_html=True)
 
 mode = st.sidebar.selectbox("Mode", ["🏆 Tournament", "⚔️ Match"])
 
