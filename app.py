@@ -31,7 +31,7 @@ LOGO_MAP = {
     "Rising Pune Supergiants": "https://documents.iplt20.com/ipl/LSG/Logos/Logooutline/LSGoutline.png", # Fallback
     "Kochi Tuskers Kerala": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f7/Kochi_Tuskers_Kerala_Logo.svg/200px-Kochi_Tuskers_Kerala_Logo.svg.png" # Wikimedia fallback
 }
-DEFAULT_LOGO = "https://documents.iplt20.com/ipl/IPL/Logos/Logooutline/IPLoutline.png"
+DEFAULT_LOGO = "https://upload.wikimedia.org/wikipedia/en/thumb/8/41/IPL_Logo.svg/200px-IPL_Logo.svg.png"
 
 # ---------------- CSS ----------------
 st.markdown("""
