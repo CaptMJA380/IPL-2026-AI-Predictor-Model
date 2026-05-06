@@ -141,7 +141,24 @@ df['team1'] = df['team1'].str.strip()
 df['team2'] = df['team2'].str.strip()
 df['winner'] = df['winner'].str.strip()
 
-teams = sorted(list(set(df['team1']).union(set(df['team2']))))
+# Unify old franchise names
+TEAM_NORM = {
+    'Royal Challengers Bangalore': 'Royal Challengers Bengaluru',
+    'Delhi Daredevils':            'Delhi Capitals',
+    'Kings XI Punjab':             'Punjab Kings',
+    'Rising Pune Supergiant':      'Rising Pune Supergiants',
+}
+df['team1'] = df['team1'].replace(TEAM_NORM)
+df['team2'] = df['team2'].replace(TEAM_NORM)
+df['winner'] = df['winner'].replace(TEAM_NORM)
+
+# Filter to current 10 franchises only
+teams = [
+    'Mumbai Indians', 'Chennai Super Kings', 'Kolkata Knight Riders',
+    'Royal Challengers Bengaluru', 'Sunrisers Hyderabad', 'Delhi Capitals',
+    'Rajasthan Royals', 'Punjab Kings', 'Lucknow Super Giants', 'Gujarat Titans'
+]
+teams = sorted(teams)
 df = df[df['winner'].isin(teams)]
 
 # ---------------- PREDICT FUNCTION ----------------
